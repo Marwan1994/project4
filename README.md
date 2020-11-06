@@ -1,42 +1,80 @@
-<include a CircleCI status badge, here>
+# devops
+ project4 udacity nanodegree
 
-## Project Overview
+![devops](https://circleci.com/gh/ahmed-elnagar/devops.svg?style=svg)
 
-In this project, you will apply the skills you have acquired in this course to operationalize a Machine Learning Microservice API. 
+Steps:
 
-You are given a pre-trained, `sklearn` model that has been trained to predict housing prices in Boston according to several features, such as average rooms in a home and data about highway access, teacher-to-pupil ratios, and so on. You can read more about the data, which was initially taken from Kaggle, on [the data source site](https://www.kaggle.com/c/boston-housing). This project tests your ability to operationalize a Python flask app—in a provided file, `app.py`—that serves out predictions (inference) about housing prices through API calls. This project could be extended to any pre-trained machine learning model, such as those for image recognition and data labeling.
+Clone the repository
 
-### Project Tasks
+    git clone https://github.com/udacity/DevOps_Microservices.git
+Get to the main working directory
 
-Your project goal is to operationalize this working, machine learning microservice using [kubernetes](https://kubernetes.io/), which is an open-source system for automating the management of containerized applications. In this project you will:
-* Test your project code using linting
-* Complete a Dockerfile to containerize this application
-* Deploy your containerized application using Docker and make a prediction
-* Improve the log statements in the source code for this application
-* Configure Kubernetes and create a Kubernetes cluster
-* Deploy a container using Kubernetes and make a prediction
-* Upload a complete Github repo with CircleCI to indicate that your code has been tested
+    cd DevOps_Microservices/project-ml-microservice-kubernetes
+Start with the initiation procedures.
 
-You can find a detailed [project rubric, here](https://review.udacity.com/#!/rubrics/2576/view).
+Using Makefiles perform the following:
 
-**The final implementation of the project will showcase your abilities to operationalize production microservices.**
+    Activate the virtual environment
 
----
+        make setup
 
-## Setup the Environment
+    Install the project dependencies
 
-* Create a virtualenv and activate it
-* Run `make install` to install the necessary dependencies
+        make install
 
-### Running `app.py`
+    Lint both Dockerfile as well as app.py Flask application.
 
-1. Standalone:  `python app.py`
-2. Run in Docker:  `./run_docker.sh`
-3. Run in Kubernetes:  `./run_kubernetes.sh`
+        make lint
 
-### Kubernetes Steps
+Install other tools Like Docker, hadolint and Kubernetes (Minikube)
+        Docker
+            Download Docker desktop for Windows/macOS.
+Hadolint
+        scoop install hadolint
 
-* Setup and Configure Docker locally
-* Setup and Configure Kubernetes locally
-* Create Flask app in Container
-* Run via kubectl
+Minikube Install Minikube through the executable installer available here.
+
+Detailed Project tasks
+
+    Complete the Dockerfile.
+    Run the container and make a prediction using make_prediction.sh.
+    Improve the logging and save the output to docker_out.txt.
+    Upload the docker image using run_docker.sh file. \
+    Configure Kubernetes to run locally.
+    Deploy with Kubernetes and save the logs to kubernetes_out.txt.
+    Delete the cluster once operations are complete.
+    Integrate the project with CircleCI.
+    Add the build badge to repository.
+
+Files explained
+model_data
+
+This folder contains the necessary information in csv and the machine learning model.
+output_txt_files/docker_out.txt
+
+This file contains the output of the prediction model when run in the Docker container.
+output_txt_files/kuernetes_out.txt
+
+This file contains the output of the prediction model when run in a Kubernetes cluster. This file also contains information about the deployment, port forwarding process along with the outout of the prediction model that is visible in another terminal.
+Dockerfile
+
+The Dockerfile is used for executing the necessary instructions for assembly of a Docker image.
+Makefile
+
+The Makefile contains a set of directives for achieving the automation of the project. Instead of manually typing each commands, it can be collectively inserted into one Makefile and then use the make command to execute each instruction.
+app.py
+
+The app.py file contains the Flask application that will take the json payload for the predictive model.
+make_prediction.sh
+
+A shell script that ocntains the JSON payload that will be accepted by the flask application.
+run_docker.sh
+
+A shell script that contains instructions for the Docker image creation process.
+run_kubernetes.sh
+
+A shell script that contains instructions for app deployment into a Kubernetes cluster including instructions for port-forwarding procedure.
+upload_docker.sh
+
+A shell script that contains instructions to push the docker image into repository.
